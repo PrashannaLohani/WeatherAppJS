@@ -25,10 +25,14 @@ const day = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
 );
 currentDay.innerHTML = day;
 
+//
+
 const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
   new Date()
 );
 currentMonth.innerHTML = month;
+
+//
 
 const date = d.getDate();
 currentDate.innerHTML = date;
@@ -37,20 +41,28 @@ currentDate.innerHTML = date;
 
 function weatherDetail(data) {
   const list = data?.main;
+  //
   const temperature = (list?.temp - 273.15).toFixed(2);
   temp.innerHTML = `${temperature}°C`;
+  //
   const humid = list?.humidity;
   humidity.innerHTML = `${humid} g/kg`;
+  //
   const psi = list?.pressure;
   pressure.innerHTML = `${psi} psi`;
+  //
   const maxTemp = (list?.temp_max - 273.15).toFixed(2);
   max_temp.innerHTML = `${maxTemp}°C`;
+  //
   const minTemp = (list?.temp_min - 273.15).toFixed(2);
   min_temp.innerHTML = `${minTemp}°C`;
+  //
   const windSpeed = data?.wind?.speed;
   wind_speed.innerHTML = `${windSpeed} m/s`;
+  //
   const location = data?.name;
   locate.innerHTML = location;
+  //
 }
 
 //Fetching the api for Scottsboro
@@ -79,6 +91,9 @@ if (form) {
     searchWeather();
   });
 }
+
+// fetching api for the location the wil be searched
+
 function searchWeather() {
   const searchInput = document.getElementById("Search");
   const search = searchInput.value;
