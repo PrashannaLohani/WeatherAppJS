@@ -70,9 +70,17 @@ fetch(
     console.error(error);
   });
 
+const form = document.getElementById("form");
+if (form) {
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    searchWeather();
+  });
+}
 function searchWeather() {
   const searchInput = document.getElementById("Search");
   const search = searchInput.value;
+
   if (search) {
     const apiKey = "ffb7ef2f2d3e52a078716e7f2b9d59c2";
 
