@@ -70,6 +70,8 @@ fetch(
     console.error(error);
   });
 
+//preventing page to refresh
+
 const form = document.getElementById("form");
 if (form) {
   form.addEventListener("submit", (e) => {
