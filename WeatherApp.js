@@ -1,24 +1,48 @@
 //Date, time and Day of the current day
 
 const time = document.getElementById("time");
+//
 const currentDay = document.getElementById("Day");
+//
 const currentMonth = document.getElementById("month");
+//
 const currentDate = document.getElementById("date");
+//
 const temp = document.getElementById("Temp");
+//
+const weatherInfo = document.getElementById("weatherInfo");
+//
+const weatherIcon = document.getElementById("weatherIcon");
+//
 const humidity = document.getElementById("humidity");
+//
 const pressure = document.getElementById("pressure");
+//
 const max_temp = document.getElementById("mxtemp");
+//
 const min_temp = document.getElementById("mntemp");
+//
 const wind_speed = document.getElementById("windSpeed");
+//
 const locate = document.getElementById("Location");
 
+//
+
+// Making the clock dynamic in real time
+
+const clock = setInterval(clocktiming, 1000);
+function clocktiming() {
+  const d = new Date();
+  const hour = d.getHours().toString().padStart(2, "0");
+  const hrIn12 = hour % 12 || 12;
+
+  const minute = d.getMinutes().toString().padStart(2, "0");
+  const amPm = hour >= 12 ? "PM" : "AM";
+  const currentTime = [hrIn12, minute].join(":") + " " + `<span>${amPm}</span>`;
+  time.innerHTML = currentTime;
+}
+
 const d = new Date();
-const hour = d.getHours().toString().padStart(2, "0");
-const hrIn12 = hour % 12 || 12;
-const minute = d.getMinutes().toString().padStart(2, "0");
-const amPm = hour >= 12 ? "PM" : "AM";
-const currentTime = [hrIn12, minute].join(":") + " " + `<span>${amPm}</span>`;
-time.innerHTML = currentTime;
 
 const day = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
   new Date()
@@ -37,6 +61,8 @@ currentMonth.innerHTML = month;
 const date = d.getDate();
 currentDate.innerHTML = date;
 
+//
+
 //Collecting the data and displaying
 
 function weatherDetail(data) {
@@ -45,11 +71,18 @@ function weatherDetail(data) {
   const temperature = (list?.temp - 273.15).toFixed(2);
   temp.innerHTML = `${temperature}°C`;
   //
-  const humid = list?.humidity;
-  humidity.innerHTML = `${humid} g/kg`;
+  const weather = data?.weather[0]?.main;
+  weatherInfo.innerHTML = weather.toUpperCase();
   //
-  const psi = list?.pressure;
-  pressure.innerHTML = `${psi} psi`;
+  // const icon = data?.weather[0]?.icon;
+  // weatherIcon.innerHTML = icon;
+
+  //
+  const humid = (list?.humidity / 100).toFixed(2);
+  humidity.innerHTML = `${humid} %`;
+  //
+  const psi = (list?.pressure / 68.9476).toFixed(2);
+  pressure.innerHTML = `${psi} hPs`;
   //
   const maxTemp = (list?.temp_max - 273.15).toFixed(2);
   max_temp.innerHTML = `${maxTemp}°C`;
@@ -63,6 +96,24 @@ function weatherDetail(data) {
   const location = data?.name;
   locate.innerHTML = location;
   //
+  const iconCode = data?.weather[0]?.icon;
+  const iconClass = getIconClass(iconCode);
+  weatherIcon.className = `fas ${iconClass}`;
+
+  function getIconClass(iconCode) {
+    const iconMappings = {
+      "01d": "fa-sun",
+      "01n": "fa-moon",
+      "02d": "fa-cloud-sun",
+      "02n": "fa-cloud-moon",
+      "03d": "fa-cloud",
+      "03n": "fa-cloud",
+      "04d": "fa-cloud",
+      "04n": "fa-cloud",
+    };
+
+    return iconMappings[iconCode] || "fa-question-circle";
+  }
 }
 
 //Fetching the api for Scottsboro
@@ -76,6 +127,7 @@ fetch(
   .then((response) => response.json())
   .then((data) => {
     weatherDetail(data);
+    console.log(data);
   })
   .catch((error) => {
     // Handle any errors
@@ -107,6 +159,7 @@ function searchWeather() {
       .then((response) => response.json())
       .then((data) => {
         weatherDetail(data);
+        console.log(data);
         searchInput.value = "";
       })
       .catch((error) => {

@@ -68,7 +68,7 @@ main {
 }
 .Container1 {
   background-color: aliceblue;
-  opacity: 0.5;
+  opacity: 0.7;
   margin: 2rem;
   padding: 3rem;
   width: min(100%, 600px);
@@ -105,13 +105,18 @@ span {
   display: flex;
   flex-direction: row;
 }
-#weatherImg {
+#weatherIcon {
   margin-top: 3rem;
   font-size: 4rem;
 }
 #Temp {
   font-size: 6rem;
   margin: 0.5rem;
+}
+#weatherInfo {
+  font-size: 2rem;
+  margin-left: 1rem;
+  color: gray;
 }
 .location {
   display: flex;
@@ -125,7 +130,7 @@ span {
   display: flex;
   flex-direction: row;
   background-color: aliceblue;
-  opacity: 0.5;
+  opacity: 0.7;
   margin: 2rem;
   padding: 3rem;
   width: min(100%, 950px);
