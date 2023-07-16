@@ -12,8 +12,6 @@ const temp = document.getElementById("Temp");
 //
 const weatherInfo = document.getElementById("weatherInfo");
 //
-const weatherIcon = document.getElementById("weatherIcon");
-//
 const humidity = document.getElementById("humidity");
 //
 const pressure = document.getElementById("pressure");
@@ -30,8 +28,8 @@ const locate = document.getElementById("Location");
 
 // Making the clock dynamic in real time
 
-const clock = setInterval(clocktiming, 1000);
-function clocktiming() {
+const clock = setInterval(clockTiming, 1000);
+function clockTiming() {
   const d = new Date();
   const hour = d.getHours().toString().padStart(2, "0");
   const hrIn12 = hour % 12 || 12;
@@ -73,9 +71,6 @@ function weatherDetail(data) {
   //
   const weather = data?.weather[0]?.main;
   weatherInfo.innerHTML = weather.toUpperCase();
-  //
-  // const icon = data?.weather[0]?.icon;
-  // weatherIcon.innerHTML = icon;
 
   //
   const humid = (list?.humidity / 100).toFixed(2);
@@ -95,24 +90,29 @@ function weatherDetail(data) {
   //
   const location = data?.name;
   locate.innerHTML = location;
+
   //
-  const iconCode = data?.weather[0]?.icon;
-  const iconClass = getIconClass(iconCode);
-  weatherIcon.className = `fas ${iconClass}`;
+  const weatherCondition = data?.weather[0]?.main;
+  weatherInfo.innerHTML = weatherCondition.toUpperCase();
+  // Set weather icon
+  const icon = document.getElementById("weatherIcon");
 
-  function getIconClass(iconCode) {
-    const iconMappings = {
-      "01d": "fa-sun",
-      "01n": "fa-moon",
-      "02d": "fa-cloud-sun",
-      "02n": "fa-cloud-moon",
-      "03d": "fa-cloud",
-      "03n": "fa-cloud",
-      "04d": "fa-cloud",
-      "04n": "fa-cloud",
-    };
-
-    return iconMappings[iconCode] || "fa-question-circle";
+  switch (weatherCondition) {
+    case "Clear":
+      icon.className = "fa fa-sun-o";
+      break;
+    case "Clouds":
+      icon.className = "fa fa-cloud";
+      break;
+    case "Rain":
+      icon.className = "fa fa-tint";
+      break;
+    case "Snow":
+      icon.className = "fa fa-snowflake-o";
+      break;
+    // Add more cases for different weather conditions as needed
+    default:
+      icon.className = "fa fa-question-circle";
   }
 }
 
@@ -144,7 +144,7 @@ if (form) {
   });
 }
 
-// fetching api for the location the wil be searched
+// fetching api for the location the will be searched
 
 function searchWeather() {
   const searchInput = document.getElementById("Search");
