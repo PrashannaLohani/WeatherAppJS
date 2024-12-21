@@ -1,71 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="WeatherApp.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="WeatherApp.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <title>Weather Application</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="Elements">
-        <form id="form">
-            <input id="Search" type="search" placeholder="Enter Location" required>
-            <button id="btn" type="submit">Search</button>
-        </form>
+      <form id="form">
+        <input
+          id="Search"
+          type="search"
+          placeholder="Enter Location"
+          required
+        />
+        <button id="btn" type="submit">Search</button>
+      </form>
     </div>
-    <main>
+    <div class="main-content">
+      <main>
         <div class="Container1">
-            
-            <div class="clock">
-                <div id="time"><span></span></div>
-            </div>
-            <div class="Date">
-                <div id="date"></div>
-                <div id="Day"></div>
-            </div>
-            <div id="month"></div>
-            <div class="Temperature">
-                <div id="Temp"></div>
-                <div id="weatherIcon" ><i id="icon" class="fa"></i></div>
-                
-            </div>
+          <div class="clock">
+            <div id="time"><span></span></div>
+          </div>
+          <div class="Date">
+            <div id="date"></div>
+            <div id="Day"></div>
+          </div>
+          <div id="month"></div>
+          <div class="Temperature">
+            <div id="Temp"></div>
+          </div>
+          <div class="weather-info-detail">
+            <div id="weatherIcon"><i id="icon" class="fa"></i></div>
             <div id="weatherInfo"></div>
-            <div class="location">
-                <i class="fa fa-map-marker " aria-hidden="true" style="font-size: 2.6rem; margin-top: 7px; color: red;"></i>
-                <div id="Location"></div>  
-            </div>
+          </div>
+          <div class="location">
+            <i
+              class="fa fa-map-marker"
+              aria-hidden="true"
+              style="font-size: 30px; color: red"
+            ></i>
+            <div id="Location"></div>
+          </div>
         </div>
         <div class="Container2">
-            <div class="Info">
-                <div class="humidity">
-                    <label>Humidity:</label>
-                    <p id="humidity"></p>
-                </div>
-                <div class="pressure">
-                    <label>Pressure :</label>
-                    <p id="pressure"></p>
-                </div>
-                <div class="max-temp">
-                    <label>Max Temperature:</label>
-                    <p id="mxtemp"></p>
-                </div>
-                <div class="min-temp">
-                    <label>Min Temperature:</label>
-                    <p id="mntemp"></p>
-                </div>
-                <div class="wind-speed">
-                    <label>Wind Speed:</label>
-                    <p id="windSpeed"></p>
-                </div> 
+          <div class="Info">
+            <div class="humidity">
+              <label>Humidity:</label>
+              <p id="humidity"></p>
             </div>
-            <!-- <hr>
-            <div class="7-days">
-
-            </div> -->
-
+            <div class="pressure">
+              <label>Pressure :</label>
+              <p id="pressure"></p>
+            </div>
+            <div class="max-temp">
+              <label>Max Temperature:</label>
+              <p id="mxtemp"></p>
+            </div>
+            <div class="min-temp">
+              <label>Min Temperature:</label>
+              <p id="mntemp"></p>
+            </div>
+            <div class="wind-speed">
+              <label>Wind Speed:</label>
+              <p id="windSpeed"></p>
+            </div>
+          </div>
         </div>
-    </main>
+      </main>
+    </div>
     <script src="WeatherApp.js"></script>
-</body>
+  </body>
 </html>

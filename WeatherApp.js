@@ -29,29 +29,31 @@ const locate = document.getElementById("Location");
 // Making the clock dynamic in real time
 
 const clock = setInterval(clockTiming, 1000);
+const d = new Date(); //get the current date and time
 function clockTiming() {
-  const d = new Date();
   const hour = d.getHours().toString().padStart(2, "0");
-  const hrIn12 = hour % 12 || 12;
+  const hrIn12 = hour % 12 || 12; //This is required to convert 24hr format to 12hr format
 
   const minute = d.getMinutes().toString().padStart(2, "0");
-  const amPm = hour >= 12 ? "PM" : "AM";
-  const currentTime = [hrIn12, minute].join(":") + " " + `<span>${amPm}</span>`;
+  const amPm = hour >= 12 ? "PM" : "AM"; //This is required to show the AM/PM
+
+  // const second = new Date().getSeconds().toString().padStart(2, "0");  //If you want to show the seconds uncomment this line
+
+  const currentTime = [hrIn12, minute].join(":") + `<span>${amPm}</span>`; //And put the second variable in the array
+
   time.innerHTML = currentTime;
 }
 
-const d = new Date();
-
 const day = new Intl.DateTimeFormat("en-US", { weekday: "long" }).format(
   new Date()
-);
+); //This is required to get the day of the week  in the current date
 currentDay.innerHTML = day;
 
 //
 
 const month = new Intl.DateTimeFormat("en-US", { month: "long" }).format(
   new Date()
-);
+); //This is required to get the month in the current date
 currentMonth.innerHTML = month;
 
 //
@@ -93,6 +95,7 @@ function weatherDetail(data) {
 
   //
   const weatherCondition = data?.weather[0]?.main;
+
   weatherInfo.innerHTML = weatherCondition.toUpperCase();
   // Set weather icon
   const icon = document.getElementById("weatherIcon");
@@ -118,7 +121,7 @@ function weatherDetail(data) {
 
 //Fetching the api for Scottsboro
 
-const city = "Scottsboro";
+const city = "Colchester";
 const apiKey = "ffb7ef2f2d3e52a078716e7f2b9d59c2";
 
 fetch(
@@ -127,7 +130,6 @@ fetch(
   .then((response) => response.json())
   .then((data) => {
     weatherDetail(data);
-    console.log(data);
   })
   .catch((error) => {
     // Handle any errors
@@ -151,15 +153,12 @@ function searchWeather() {
   const search = searchInput.value;
 
   if (search) {
-    const apiKey = "ffb7ef2f2d3e52a078716e7f2b9d59c2";
-
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${apiKey}`
     )
       .then((response) => response.json())
       .then((data) => {
         weatherDetail(data);
-        console.log(data);
         searchInput.value = "";
       })
       .catch((error) => {
